@@ -5,9 +5,6 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get clean
 
-# Copy default website to Apache directory
-COPY index.html /var/www/html/
-
 # Expose port 80 for web traffic
 EXPOSE 80
 
