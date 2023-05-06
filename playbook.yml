@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache web server
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: Install PHP
+      apt: name=php update_cache=yes state=latest
+
+    - name: Install New Relic infrastructure agent
+      apt_key:
+        url: https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
+        state: present
+      apt_repository:
+        repo: "deb http://download.newrelic.com/infrastructure_agent/linux/apt {{ ansible_distribution_release }} main"
+        state: present
+      apt: update_cache=yes
+      apt: name=newrelic-infra state=latest
+
+    - name: Install SonarQube scanner
+      apt_key:
+        url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.3.48735.zip.asc
+        state: present
+      apt_repository:
+        repo: "deb https://binaries.sonarsource.com/Distribution/sonarqube/ {{ ansible_distribution_release }} main"
+        state: present
+      apt: update_cache=yes
+      apt: name=sonar-scanner state=latest
