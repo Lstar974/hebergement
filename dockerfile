@@ -11,6 +11,8 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean
+    
+RUN npm install -g mocha
 
 # Copy project files
 COPY . /var/www/html
