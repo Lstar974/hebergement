@@ -1,25 +1,15 @@
-FROM debian:latest
+FROM node:12-alpine
 
-# Update and install Apache web server
-RUN apt-get update && \
-    apt-get install -y apache2 && \
-    apt-get clean
+WORKDIR /app
 
-# Install Node.js and NPM
-RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean
-    
-RUN npm install -g mocha
+COPY package*.json ./
 
-# Copy project files
-COPY . /var/www/html
+RUN npm install
 
-# Expose port 80 for web traffic
-EXPOSE 80
+COPY . .
 
-# Start Apache in the foreground
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+EXPOSE 3000
+
+CMD [ "npm", "start" ]
+
 
