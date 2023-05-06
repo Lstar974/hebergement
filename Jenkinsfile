@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build('my-debian-web-server', '-f Dockerfile .')
+                    docker.build('my-debian-web-server', '-f dockerfile .')
                 }
             }
         }
