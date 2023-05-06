@@ -12,6 +12,9 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     apt-get clean
 
+# Copy project files
+COPY . /var/www/html
+
 # Expose port 80 for web traffic
 EXPOSE 80
 
