@@ -9,7 +9,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 ansiblePlaybook credentialsId: 'ssh', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'playbook.yml'
-                withDockerRegistry(credentialsId: 'dockerhub')
             }
         }
     }
