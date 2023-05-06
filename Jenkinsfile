@@ -10,10 +10,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'cp -r /var/lib/jenkins/workspace/hebergement /var/www/html'
-                sh 'cd /var/www/html && npm install'
-                sh 'cd /var/www/html && npm run test'
-                
+                sh 'npm run test'
             }
         }
         stage('Deploy') {
