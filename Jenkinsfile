@@ -1,13 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'my-debian-web-server'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                script {
+                    docker.build('my-debian-web-server', '-f Dockerfile .')
+                }
             }
         }
         stage('Test') {
@@ -17,9 +15,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'npm run build'
-                sh 'cp -r ./dist /var/www/html'
-                sh 'systemctl reload apache2'
+                sh 'docker run -d --name my-app -p 80:80 my-debian-web-server'
                 sh 'newrelic-infra start'
                 sh 'sonar-scanner'
             }
