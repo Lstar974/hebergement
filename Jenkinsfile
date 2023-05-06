@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm install'
-                sh 'mocha tests'
+                sh 'npm run test'
             }
         }
         stage('Deploy') {
