@@ -5,6 +5,9 @@ RUN apt-get update && \
     apt-get install -y apache2 && \
     apt-get clean
 
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
 # Expose port 80 for web traffic
 EXPOSE 80
 
