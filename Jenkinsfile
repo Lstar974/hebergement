@@ -2,22 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker image') {
             steps {
-                sh 'ansible-playbook playbook.yml'
+                sh 'docker build -t my-web-server .'
             }
         }
-        stage('Test') {
+        
+        stage('Deploy environment') {
+            steps {
+                ansiblePlaybook become: true, playbook: 'playbook.yml'
+            }
+        }
+        
+        stage('Test environment') {
             steps {
                 sh 'docker run --rm my-web-server /usr/bin/python3 /var/lib/jenkins/workspace/DevOps/test_selenium.py'
             }
-            post {
-                success {
-                    echo 'The web server is working correctly.'
-                }
-                failure {
-                    echo 'The web server is not working correctly.'
-                }
+        }
+        
+        stage('Deploy web server') {
+            steps {
+                ansiblePlaybook become: true, playbook: 'deploy.yml'
             }
         }
     }
