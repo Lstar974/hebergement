@@ -1,25 +1,22 @@
 pipeline {
     agent any
- 
+
     stages {
+        stage('Build') {
+            steps {
+                sh 'docker build -t my-web-server .'
+            }
+        }
         stage('Test') {
             steps {
-                bat "mvn -D clean test"
+                sh 'docker run --rm my-web-server python /var/lib/jenkins/workspace/DevOps/test_selenium.py'
             }
- 
-            post {                
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
+            post {
                 success {
-                   publishHTML([
-                       allowMissing: false, 
-                       alwaysLinkToLastBuild: false, 
-                       keepAll: false, 
-                       reportDir: 'target/surefire-reports/', 
-                       reportFiles: 'emailable-report.html', 
-                       reportName: 'HTML Report', 
-                       reportTitles: '', 
-                       useWrapperFileDirectly: true])
+                    echo 'The web server is working correctly.'
+                }
+                failure {
+                    echo 'The web server is not working correctly.'
                 }
             }
         }
