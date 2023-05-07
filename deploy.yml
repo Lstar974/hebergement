@@ -1,0 +1,33 @@
+---
+- name: Build and deploy web server
+  hosts: all
+  become: true
+  vars:
+    app_port: 80
+    app_path: /var/www/my-web-server
+  tasks:
+    - name: Copy web files
+      copy:
+        src: index.html
+        dest: "{{ app_path }}/index.html"
+        mode: 0755
+
+    - name: Install Python 3
+      apt:
+        name: python3
+        state: present
+
+    - name: Install pip for Python 3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install Flask
+      pip:
+        name: flask
+        state: present
+
+    - name: Start web server
+      command: "python3 {{ app_path }}/app.py"
+      async: 0
+      poll: 0
