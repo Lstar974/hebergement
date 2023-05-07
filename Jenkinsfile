@@ -16,7 +16,7 @@ pipeline {
         
         stage('Test environment') {
             steps {
-               sh 'docker run --rm -v /usr/bin/google-chrome:/usr/bin/google-chrome my-web-server /usr/bin/python3 /var/lib/jenkins/workspace/DevOps/test_selenium.py --user-data-dir=/tmp'
+               sh 'docker run --rm -v /usr/bin/google-chrome:/usr/bin/google-chrome my-web-server /usr/bin/python3 /var/lib/jenkins/workspace/DevOps/test_selenium.py --no-sandbox'
             }
         }
         
