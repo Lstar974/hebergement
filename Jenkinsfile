@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t my-web-server .'
+                sh 'ansible-playbook playbook.yml'
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm my-web-server ansible-playbook -i inventory.ini playbook.yml'
+                sh 'docker run --rm my-web-server python /var/lib/jenkins/workspace/DevOps/test_selenium.py'
             }
             post {
                 success {
