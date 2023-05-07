@@ -1,15 +1,18 @@
-FROM node:12-alpine
+FROM debian:latest
 
-WORKDIR /app
+# Install dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip wget unzip curl xvfb chromium chromium-driver
 
-COPY package*.json ./
+# Install Selenium
+RUN pip3 install selenium
 
-RUN npm install
+# Add test script
+ADD test_selenium.py /var/lib/jenkins/workspace/DevOps/test_selenium.py
 
-COPY . .
+# Expose port 80
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD [ "npm", "start" ]
+# Start web server
+CMD ["python3", "-m", "http.server", "80"]
 
 
