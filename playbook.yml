@@ -11,8 +11,3 @@
         src: index.html
         dest: "{{ app_path }}/index.html"
         mode: 0755
-
-    - name: Start web server
-      shell: "cd {{ app_path }} && python3 -m http.server {{ app_port }}"
-      async: 0
-      poll: 0
