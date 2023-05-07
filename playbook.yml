@@ -7,15 +7,16 @@
     app_path: /var/www/my-web-server
   tasks:
     - name: Copy web files
-      login_host: 192.168.6.10
-      login_user: lucas
-      login_password: root
       copy:
         src: index.html
         dest: "{{ app_path }}/index.html"
         mode: 0755
+      remote_user: lucas
+      become_user: root
 
     - name: Start web server
       shell: "cd {{ app_path }} && python3 -m http.server {{ app_port }}"
       async: 0
       poll: 0
+      remote_user: lucas
+      become_user: root
