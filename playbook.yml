@@ -1,40 +1,16 @@
 ---
 - name: Build and deploy web server
-  hosts: my-web-server
+  hosts: all
   become: true
   vars:
     app_port: 80
     app_path: /var/www/my-web-server
   tasks:
-    - name: Install dependencies
-      apt:
-        name:
-          - python3
-          - python3-pip
-          - wget
-          - unzip
-          - curl
-          - xvfb
-          - chromium
-          - chromium-driver
-        state: present
-
-    - name: Install Selenium
-      pip:
-        name: selenium
-        state: present
-
-    - name: Copy test script
+    - name: Copy web files
       copy:
-        src: test_selenium.py
-        dest: "{{ app_path }}/test_selenium.py"
+        src: index.html
+        dest: "{{ app_path }}/index.html"
         mode: 0755
-
-    - name: Expose port 80
-      ufw:
-        rule: allow
-        port: 80
-        proto: tcp
 
     - name: Start web server
       shell: "cd {{ app_path }} && python3 -m http.server {{ app_port }}"
