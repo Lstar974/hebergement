@@ -22,7 +22,7 @@ pipeline {
         
         stage('Deploy web server') {
             steps {
-                ansiblePlaybook credentialsId: 'ssh', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'deploy.yml'
+                ansiblePlaybook credentialsId: 'serv', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'deploy.yml'
             }
         }
     }
