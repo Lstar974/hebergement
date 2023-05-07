@@ -10,7 +10,7 @@ pipeline {
         
         stage('Deploy environment') {
             steps {
-                ansiblePlaybook become: true, playbook: 'playbook.yml'
+                ansiblePlaybook credentialsId: 'e3a09f7c-fbae-4ad2-9952-026fcd8d2aed', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'playbook.yml'
             }
         }
         
@@ -22,7 +22,7 @@ pipeline {
         
         stage('Deploy web server') {
             steps {
-                ansiblePlaybook become: true, playbook: 'deploy.yml'
+                ansiblePlaybook credentialsId: 'e3a09f7c-fbae-4ad2-9952-026fcd8d2aed', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'deploy.yml'
             }
         }
     }
