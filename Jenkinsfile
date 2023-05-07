@@ -10,7 +10,7 @@ pipeline {
         
         stage('Deploy environment') {
             steps {
-                ansiblePlaybook credentialsId: 'ssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'playbook.yml', playbook: 'playbook.yml'
+                ansiblePlaybook credentialsId: 'ssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'playbook.yml'
             }
         }
         
