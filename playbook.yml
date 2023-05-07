@@ -7,6 +7,9 @@
     app_path: /var/www/my-web-server
   tasks:
     - name: Copy web files
+      login_host: 192.168.6.10
+      login_user: lucas
+      login_password: root
       copy:
         src: index.html
         dest: "{{ app_path }}/index.html"
