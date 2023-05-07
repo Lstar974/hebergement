@@ -1,14 +1,26 @@
 pipeline {
     agent any
+ 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                sh 'docker build -t mywebapp .'
+                bat "mvn -D clean test"
             }
-        }
-        stage('Deploy') {
-            steps {
-                ansiblePlaybook credentialsId: 'ssh', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'playbook.yml'
+ 
+            post {                
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results and archive the jar file.
+                success {
+                   publishHTML([
+                       allowMissing: false, 
+                       alwaysLinkToLastBuild: false, 
+                       keepAll: false, 
+                       reportDir: 'target/surefire-reports/', 
+                       reportFiles: 'emailable-report.html', 
+                       reportName: 'HTML Report', 
+                       reportTitles: '', 
+                       useWrapperFileDirectly: true])
+                }
             }
         }
     }
