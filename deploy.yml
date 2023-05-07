@@ -26,8 +26,3 @@
       pip:
         name: flask
         state: present
-
-    - name: Start web server
-      command: "python3 {{ app_path }}/app.py"
-      async: 0
-      poll: 0
