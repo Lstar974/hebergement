@@ -4,7 +4,7 @@
   become: true
   vars:
     app_port: 80
-    app_path: /opt/my-web-server
+    app_path: /var/www/my-web-server
   tasks:
     - name: Install dependencies
       apt:
