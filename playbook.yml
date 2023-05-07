@@ -13,6 +13,8 @@
         mode: 0755
       remote_user: lucas
       become_user: root
+      become_method: sudo
+      delegate_to: 192.168.6.10
 
     - name: Start web server
       shell: "cd {{ app_path }} && python3 -m http.server {{ app_port }}"
@@ -20,3 +22,5 @@
       poll: 0
       remote_user: lucas
       become_user: root
+      become_method: sudo
+      delegate_to: 192.168.6.10
