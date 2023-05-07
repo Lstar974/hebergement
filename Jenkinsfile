@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm my-web-server python /var/lib/jenkins/workspace/DevOps/test_selenium.py'
+                sh 'docker run --rm my-web-server /usr/bin/python3 /var/lib/jenkins/workspace/DevOps/test_selenium.py'
             }
             post {
                 success {
