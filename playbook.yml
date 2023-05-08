@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   vars:
-    docker_image_name: hebergement
+    docker_image_name: lstar974/hebergement
     docker_image_tag: latest
 
   tasks:
