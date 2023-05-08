@@ -14,8 +14,7 @@ RUN apt-get update && apt-get install -y \
     php8.1-mbstring \
     php8.1-soap \
     php8.1-xml \
-    php8.1-zip \
-    git
+    php8.1-zip
 
 # Cloner le référentiel Github
 RUN git clone https://github.com/lstar974/site.git /var/www/html
