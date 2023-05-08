@@ -18,15 +18,19 @@ pipeline {
         }
       }
     }
+    stage('Install dependencies') {
+      steps {
+        sh 'pip install selenium'
+      }
+    }
+    stage('Run tests') {
+      steps {
+        sh 'python /var/lib/jenkins/workspace/DevOps/test_selenium.py'
+      }
+    }
     stage('Deploy with Ansible') {
       steps {
         ansiblePlaybook credentialsId: 'ssh', inventory: 'hosts.yml', playbook: 'playbook.yml'
-      }
-    }
-    stage('Run Selenium tests') {
-      steps {
-        sh "pip install selenium"
-        sh "python /var/lib/jenkins/workspace/DevOps/test_selenium.py"
       }
     }
   }
