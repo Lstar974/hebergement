@@ -29,4 +29,16 @@ pipeline {
       }
     }
   }
+
+  post {
+    always {
+      prometheus([
+        jobName: 'my-job',
+        customJenkinsUrl: 'http://my-jenkins-server:8080',
+        customName: 'my-job',
+        includeRegexes: '.*',
+        excludeRegexes: ''
+      ])
+    }
+  }
 }
