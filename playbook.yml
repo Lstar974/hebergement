@@ -2,8 +2,8 @@
 - hosts: all
   become: true
   vars:
-    docker_image_name: site
-    docker_image_tag: futur
+    docker_image_name: Image
+    docker_image_tag: latest
 
   tasks:
     - name: Démarrer le service Docker
