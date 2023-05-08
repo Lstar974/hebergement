@@ -4,7 +4,7 @@
   vars:
     docker_image_name: lstar974/hebergement
     docker_image_tag: latest
-
+    docker_container_name: site
   tasks:
     - name: Démarrer le service Docker
       systemd:
@@ -18,7 +18,7 @@
 
     - name: Stopper le conteneur
       docker_container:
-        name: "{{ docker_image_name }}"
+        name: "{{ docker_container_name }}"
         state: stopped
         force_kill: yes
       register: stopped_container
@@ -26,13 +26,13 @@
 
     - name: Supprimer le conteneur
       docker_container:
-        name: "{{ docker_image_name }}"
+        name: "{{ docker_container_name }}"
         state: absent
       when: stopped_container is defined and stopped_container is succeeded
 
     - name: Démarrer le nouveau conteneur
       docker_container:
-        name: "{{ docker_image_name }}"
+        name: "{{ docker_container_name }}"
         image: "{{ docker_image_name }}:{{ docker_image_tag }}"
         ports:
           - "80:80"
