@@ -7,13 +7,13 @@ pipeline {
     }
     stage('Push image') {
         withDockerRegistry(credentialsId: 'docker') {
-        dockerImage.push()
+          dockerImage.push()
         }
+    }
     stage('Deploy with Ansible') {
       steps {
         ansiblePlaybook credentialsId: 'ssh', inventory: 'hosts.yml', playbook: 'playbook.yml'
       }
     }
   }
-}
 }
