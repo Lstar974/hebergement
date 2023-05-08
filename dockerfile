@@ -3,18 +3,20 @@ FROM debian:buster-slim
 
 # Mettre à jour le système et installer les dépendances
 RUN apt-get update && apt-get install -y \
+      DEBIAN_FRONTEND=noninteractive apt-get install -y \
     apache2 \
     curl \
-    php8.1 \
-    libapache2-mod-php8.1 \
-    php8.1-mysql \
-    php8.1-curl \
-    php8.1-gd \
-    php8.1-intl \
-    php8.1-mbstring \
-    php8.1-soap \
-    php8.1-xml \
-    php8.1-zip
+    php7.4 \
+    libapache2-mod-php7.4 \
+    php7.4-mysql \
+    php7.4-curl \
+    php7.4-gd \
+    php7.4-intl \
+    php7.4-mbstring \
+    php7.4-soap \
+    php7.4-xml \
+    php7.4-zip \
+    git
 
 # Cloner le référentiel Github
 RUN git clone https://github.com/lstar974/site.git /var/www/html
