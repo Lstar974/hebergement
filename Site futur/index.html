@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul class="nav-list">
+            <li class="nav-items"><a href="#accueil">Accueil</a></li>
+            <li class="nav-items"><a href="#musiques">Musiques</a></li>
+            <li class="nav-items"><a href="#avenir">Avenir</a></li>
+        </ul>
+    </nav>  
+    <div class="screen" id="accueil">
+        <div class="profil" id="accueil">
+            <div class="profil-image">
+                <img src="./Media/profil.jpg" width="300" height="400">
+            </div>
+            <div class="profil-info">
+                <h2>Lucas BUCHLE</h2>
+                <p>Technicien informatique et réseau, ayant des compétences en développement web, en devops et en design web</p>
+            </div>
+            <div class="reseau">
+                <div class="reseau-ldn">
+                    <img src="./Media/linkedin.png">
+                </div>
+                <div class="reseau-insta">
+                    <img src="./Media/insta2.png">
+                </div>
+                <div class="reseau-fb">
+                    <img src="./Media/fb.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="musiques" id="musiques">
+        <div class="titre-contenu">
+            <h2>Concert</h2>
+        </div>
+        <br>
+        <div class="contenu">
+            <video autoplay muted controls loop>
+                <source src="./Media/video.mp4" type="video/mp4">
+            </video>
+            <br>
+            <div class="trait">
+                <hr>
+            </div>
+            <div class="texte-contenu">
+                <p>Trompettiste depuis plus de 10 ans et multi-instumentiste, <br>la musique est une passion qui est née chez moi depuis l'enfance à tel point,<br> qu'en faire mon métier était devenu une priorité</p>
+            </div>
+        </div>
+    </div>
+    <div class="avenir" id="avenir">
+        <div class="avenir-cadre">
+            <div class="avenir-fiche">
+                <img src="./Media/ilu1.jpg">
+                <p>RESEAU</p>
+            </div>
+            <div class="avenir-fiche">
+                <img src="./Media/ilu2.jpg">
+                <p>CODAGE WEB</p>
+            </div>
+            <div class="avenir-fiche">
+                <img src="./Media/ilu3.jpg">
+                <p>MUSIQUE</p>
+            </div>
+            <div class="avenir-fiche">
+                <img src="./Media/ilu4.jpg">
+                <p>CREATEUR DE STARTUP</p>
+            </div>
+        </div>
+    </div>
+    <!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//172.20.10.2/matomo/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '1']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+  
+</body>
+</html>
