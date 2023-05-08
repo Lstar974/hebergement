@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     git
 
 # Cloner le référentiel Github
-RUN git clone https://github.com/votre_utilisateur/nom_projet.git /var/www/html
+RUN git clone https://github.com/lstar974/site.git /var/www/html
 
 # Activer le module Apache pour PHP 8.1
 RUN a2enmod php8.1
