@@ -43,4 +43,3 @@ pipeline {
         mimeType: 'text/html'
     }
   }
-} 
