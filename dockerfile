@@ -1,26 +1,30 @@
-FROM debian:11
+# Image de base
+FROM debian:buster-slim
 
-# Install dependencies
+# Mettre à jour le système et installer les dépendances
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    wget \
-    unzip \
+    apache2 \
     curl \
-    xvfb \
-    chromium \
-    chromium-driver
+    php8.1 \
+    libapache2-mod-php8.1 \
+    php8.1-mysql \
+    php8.1-curl \
+    php8.1-gd \
+    php8.1-intl \
+    php8.1-mbstring \
+    php8.1-soap \
+    php8.1-xml \
+    php8.1-zip \
+    git
 
-# Install Selenium
-RUN pip3 install selenium
+# Cloner le référentiel Github
+RUN git clone https://github.com/votre_utilisateur/nom_projet.git /var/www/html
 
-RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/93.0.4577.63/chromedriver_linux64.zip && \
-    unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/ && \
-    chmod +x /usr/local/bin/chromedriver
+# Activer le module Apache pour PHP 8.1
+RUN a2enmod php8.1
 
-
-# Copy test script
-COPY test_selenium.py /var/lib/jenkins/workspace/DevOps/test_selenium.py
-
-# Expose port 80
+# Exposer le port 80 pour le trafic HTTP
 EXPOSE 80
+
+# Démarrer le serveur Apache2
+CMD /usr/sbin/apache2ctl -D FOREGROUND
