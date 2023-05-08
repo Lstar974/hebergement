@@ -6,11 +6,6 @@
     docker_image_tag: futur
 
   tasks:
-    - name: Installer Docker
-      apt:
-        name: docker.io
-        state: present
-
     - name: Démarrer le service Docker
       systemd:
         name: docker
