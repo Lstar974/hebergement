@@ -33,9 +33,9 @@ pipeline {
   post {
     always {
       prometheus([
-        jobName: 'my-job',
-        customJenkinsUrl: 'http://my-jenkins-server:8080',
-        customName: 'my-job',
+        jobName: 'DevOps',
+        customJenkinsUrl: 'http://192.168.6.10:8080',
+        customName: 'hebergement',
         includeRegexes: '.*',
         excludeRegexes: ''
       ])
