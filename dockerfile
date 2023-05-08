@@ -17,8 +17,8 @@ RUN apt-get update && apt-get install -y \
     php7.3-zip \
     git
 
-# Cloner le référentiel Github
-RUN git clone https://github.com/Lstar974/site.git /var/www/html
+RUN rm -rf /var/www/html && \
+    git clone https://github.com/Lstar974/site.git /var/www/html
 
 # Activer le module Apache pour PHP 7.3
 RUN a2enmod php7.3
