@@ -16,23 +16,23 @@
         name: "{{ docker_image_name }}:{{ docker_image_tag }}"
         source: pull
 
-    - name: Stopper le conteneur s'il est déjà en cours d'exécution
+    - name: Stopper le conteneur
       docker_container:
-        name: "{{ docker_image_name }}-container"
+        name: "{{ docker_image_name }}"
         state: stopped
         force_kill: yes
       register: stopped_container
       ignore_errors: yes
 
-    - name: Supprimer le conteneur s'il existe déjà
+    - name: Supprimer le conteneur
       docker_container:
-        name: "{{ docker_image_name }}-container"
+        name: "{{ docker_image_name }}"
         state: absent
       when: stopped_container is defined and stopped_container is succeeded
 
     - name: Démarrer le nouveau conteneur
       docker_container:
-        name: "{{ docker_image_name }}-container"
+        name: "{{ docker_image_name }}"
         image: "{{ docker_image_name }}:{{ docker_image_tag }}"
         ports:
           - "80:80"
