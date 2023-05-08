@@ -31,14 +31,18 @@ pipeline {
   }
 
   post {
-    always {
-      prometheus([
-        jobName: 'DevOps',
-        customJenkinsUrl: 'http://192.168.6.10:8080',
-        customName: 'hebergement',
-        includeRegexes: '.*',
-        excludeRegexes: ''
-      ])
+    failure {
+        mail to: 'lucas.buchle@gmail.com',
+        subject: "Build failed in ${currentBuild.fullDisplayName}",
+        body: '''<html>
+                  <p>Hello,</p>
+                  <p>The build ${currentBuild.fullDisplayName} has failed.</p>
+                  <p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}#${env.BUILD_NUMBER}</a></p>
+                  </html>''',
+        mimeType: 'text/html'
+    }
+}
+
     }
   }
 }
