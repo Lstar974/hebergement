@@ -1,13 +1,44 @@
 ---
-- name: Build and deploy web server
-  hosts: all
+- hosts: webserver
   become: true
   vars:
-    app_port: 80
-    app_path: /var/www/my-web-server
+    docker_image_name: site
+    docker_image_tag: futur
+
   tasks:
-    - name: Copy web files
-      copy:
-        src: index.html
-        dest: "{{ app_path }}/index.html"
-        mode: 0755
+    - name: Installer Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Démarrer le service Docker
+      systemd:
+        name: docker
+        state: started
+
+    - name: Pull Docker image
+      docker_image:
+        name: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        source: pull
+
+    - name: Stopper le conteneur s'il est déjà en cours d'exécution
+      docker_container:
+        name: "{{ docker_image_name }}-container"
+        state: stopped
+        force_kill: yes
+      register: stopped_container
+      ignore_errors: yes
+
+    - name: Supprimer le conteneur s'il existe déjà
+      docker_container:
+        name: "{{ docker_image_name }}-container"
+        state: absent
+      when: stopped_container is defined and stopped_container is succeeded
+
+    - name: Démarrer le nouveau conteneur
+      docker_container:
+        name: "{{ docker_image_name }}-container"
+        image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        ports:
+          - "80:80"
+        state: started
