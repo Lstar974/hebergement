@@ -21,6 +21,7 @@ pipeline {
     stage('Deploy with Ansible') {
       steps {
         ansiblePlaybook credentialsId: 'ssh', inventory: 'hosts.yml', playbook: 'playbook.yml'
+          }
       }
     }
     stage('Run Selenium tests') {
@@ -41,8 +42,5 @@ pipeline {
                   </html>''',
         mimeType: 'text/html'
     }
-}
-
-    }
   }
-}
+} 
