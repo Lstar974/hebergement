@@ -6,7 +6,7 @@ pipeline {
       steps {
         sh 'docker build -t hebergement:tagname .'
         withDockerRegistry(credentialsId: 'docker') {
-        sh 'docker login -u <username> -p <password>'
+        dockerImage.push()
         }
         sh 'docker tag hebergement:tagname lstar974/hebergement:tagname'
         sh 'docker push lstar974/hebergement:tagname'
