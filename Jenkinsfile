@@ -1,3 +1,9 @@
+environment {
+  NEW_RELIC_OTLP_ENDPOINT = "https://otlp.nr-data.net:4317"
+  NEW_RELIC_API_KEY = "eu01xx3d5d45c684a2f0caf5187338c0FFFFNRAL"
+}
+
+
 pipeline {
   agent any
 
