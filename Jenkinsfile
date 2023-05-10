@@ -33,20 +33,20 @@ pipeline {
 post {
   success {
     mail to: 'lucas.buchle@gmail.com',
-         subject: "Build succeeded in ${currentBuild.fullDisplayName}",
+         subject: "Build succeeded in Jenkins",
          body: '''<html>
                    <p>Hello,</p>
-                   <p>The build ${currentBuild.fullDisplayName} has succeeded.</p>
+                   <p>The build DevOps has succeeded.</p>
                    <p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}#${env.BUILD_NUMBER}</a></p>
                    </html>''',
          mimeType: 'text/html'
   }
   failure {
     mail to: 'lucas.buchle@gmail.com',
-         subject: "Build failed in ${currentBuild.fullDisplayName}",
+         subject: "Build failed in Jenkins",
          body: '''<html>
                    <p>Hello,</p>
-                   <p>The build ${currentBuild.fullDisplayName} has failed.</p>
+                   <p>The build DevOps has failed.</p>
                    <p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}#${env.BUILD_NUMBER}</a></p>
                    </html>''',
          mimeType: 'text/html'
