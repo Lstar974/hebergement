@@ -51,11 +51,5 @@ pipeline {
                      </html>''',
            mimeType: 'text/html'
     }
-    always {
-      newrelicOTLP(
-        otlpEndpoint: 'https://otlp.nr-data.net:4317',
-        apiKey: 'eu01xx3d5d45c684a2f0caf5187338c0FFFFNRAL'
-      )
-    }
   }
 }
