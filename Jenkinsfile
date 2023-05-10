@@ -56,6 +56,14 @@ post {
                    <p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}#${env.BUILD_NUMBER}</a></p>
                    </html>''',
          mimeType: 'text/html'
+    }
   }
-}
+  post {
+        always {
+            newrelicOTLP(
+                otlpEndpoint: 'https://otlp.nr-data.net:4317',
+                apiKey: 'eu01xx3d5d45c684a2f0caf5187338c0FFFFNRAL'
+            )
+        }
+    }
 }
