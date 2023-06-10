@@ -44,4 +44,3 @@
         ports:
           - "80:80"
         state: started
-      when: existing_container is failed or existing_container is skipped
