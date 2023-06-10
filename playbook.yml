@@ -6,6 +6,9 @@
     docker_image_tag: latest
     docker_container_name: site
   tasks:
+    - name : Stopper Apache2
+      command : systemctl stop apache2
+      
     - name: Démarrer le service Docker
       systemd:
         name: docker
@@ -16,24 +19,29 @@
         name: "{{ docker_image_name }}:{{ docker_image_tag }}"
         source: pull
 
-    - name: Stopper le conteneur
+    - name: Vérifier l'existence du conteneur
+      docker_container_info:
+        name: "{{ docker_container_name }}"
+      register: existing_container
+      ignore_errors: true
+
+    - name: Arrêter le conteneur existant
       docker_container:
         name: "{{ docker_container_name }}"
         state: stopped
-        force_kill: yes
-      register: stopped_container
-      ignore_errors: yes
+      when: existing_container is success
 
-    - name: Supprimer le conteneur
+    - name: Supprimer le conteneur existant
       docker_container:
         name: "{{ docker_container_name }}"
         state: absent
-      when: stopped_container is defined and stopped_container is succeeded
+      when: existing_container is success
 
-    - name: Démarrer le nouveau conteneur
+    - name: Créer et démarrer le conteneur
       docker_container:
         name: "{{ docker_container_name }}"
         image: "{{ docker_image_name }}:{{ docker_image_tag }}"
         ports:
           - "80:80"
         state: started
+      when: existing_container is failed or existing_container is skipped
